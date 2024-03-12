@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.main-img {
+    max-width: 25%; /* Set the maximum width to 100% of the container */
+    max-height: 25%; /* Set the maximum height to 300 pixels */
+    height: auto; /* Ensure that the image maintains its aspect ratio */
+    display: block; /* Remove any extra space below the image */
+    margin: auto; /* Center the image within its container */
+  }

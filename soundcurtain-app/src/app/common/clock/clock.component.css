@@ -11,9 +11,13 @@ p {
   
   
   }
+  .clock-container.afternoon, .clock-container.morning{
+    color:rgb(0, 0, 0)!important;
+  
+  
+  }
   .clock, .clock2 {
     top:30%;
-    background-color: #3c434c;
     width:50%;
     height:100%;
     margin:10px auto;
@@ -21,14 +25,18 @@ p {
   }
   .clock div, .clock2 div {
     display:inline-block;
-    background-color: #202731;
     width:25%;
     height: 100%;
     text-align: center;
   }
-  .clock2 {
-    background-color: #cdd5dc;
-  }
+  .clock div, .clock2 div{ background-color: #2c0f31; }
+  .clock2.night{    background-color: #0e0d61;}
+  .clock.morning div, .clock2.morning div{ background-color: #fee197; }
+  .clock2.morning{    background-color: #f3ecd0;}
+  .clock.afternoon div, .clock2.afternoon div{ background-color: #fff8b6; }
+  .clock2.afternoon{    background-color: #fac55b;}
+  .clock.afternoon div, .clock2.afternoon div{ background-color: #c300ff6c; }
+  .clock2.afternoon{    background-color: #cc6d0096;}
   .time{
     width:100% !important;
   }
