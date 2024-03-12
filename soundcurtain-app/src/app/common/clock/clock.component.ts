@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 
 @Component({
     selector: 'sc-clock',
-    standalone:true,
     templateUrl: './clock.component.html',
     styleUrls: [ './clock.component.css' ]
   })

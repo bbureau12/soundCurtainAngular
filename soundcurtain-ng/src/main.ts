@@ -1,7 +1,9 @@
-import { AppModule } from './app/app.module';
+import { bootstrapApplication } from '@angular/platform-browser';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppComponent } from './app/app.component';
+import { config } from 'rxjs';
 
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+const bootstrap = () => bootstrapApplication(AppComponent);
+export default bootstrap;
