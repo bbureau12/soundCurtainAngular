@@ -1,0 +1,3 @@
+<ng-container *ngIf="image$ | async as image">
+    <img [src]="'../assets/mainImg/' + image.Filename" class="main-img">
+</ng-container>
