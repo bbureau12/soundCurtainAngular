@@ -25,23 +25,18 @@ p {
   }
   .clock2 {
     width: 80%;
-    height: 90%;
   }
   .clock div {
     display:inline-block;
     text-align: center;
-    border-width:8px;
+    border-width:12px;
     border-radius: 5px;
     border-style:solid;
   }
-  .clock div{ background-color: #2c0f31; border-color:  #0e0d61;}
-  .clock2.night{    background-color: #0e0d61;}
-  .clock.morning div, .clock2.morning div{ background-color: #fee197; }
-  .clock2.morning{    background-color: #f3ecd0;}
-  .clock.afternoon div, .clock2.afternoon div{ background-color: #fff8b6; }
-  .clock2.afternoon{    background-color: #fac55b;}
-  .clock.afternoon div, .clock2.afternoon div{ background-color: #c300ff6c; }
-  .clock2.afternoon{    background-color: #cc6d0096;}
+  .night div{ background-color: #2c0f31; border-color:  #0e0d61;}
+  .morning div{ background-color: #fee197; border-color:  #f3ecd0;}
+  .afternoon div{ background-color: #fac55b; border-color:  #83e6ff;}
+  .evening div{ background-color: #c300ff6c; border-color:  #cc6d0096;}
   .time{
     width:100% !important;
   }
