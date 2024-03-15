@@ -14,6 +14,7 @@ import { MediaService } from './services/mediaService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { ImageSizeClassDirective } from './common/flavor-img/imageSizeClassDirective';
+import { ActiveButtonModule } from './common/ActiveButton/active-button.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ImageSizeClassDirective } from './common/flavor-img/imageSizeClassDirec
     ImageSizeClassDirective,
   ],
   imports: [
+    ActiveButtonModule,
     BrowserModule,
     AppRoutingModule,
     ClockModule,

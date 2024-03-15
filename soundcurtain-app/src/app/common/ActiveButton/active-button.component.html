@@ -1,0 +1,12 @@
+<button 
+    class="button-85" 
+    [ngClass]="{'active': isActive}"
+    role="button"
+    (click)="onClick()">
+    <ng-container *ngIf="isActive">
+        {{activeLabel}}
+    </ng-container>
+    <ng-container *ngIf="!isActive">
+        {{inactiveLabel}}
+    </ng-container>
+</button>

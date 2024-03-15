@@ -8,6 +8,13 @@
         <sc-clock></sc-clock>
       </div>
     </div>
-    <div class="col-sm-3 justify-content-center align-items-center"><p></p><button class="button-85 active" role="button">Button 85</button></div>
+    <div class="col-sm-3 justify-content-center align-items-center"><p></p>
+      <sc-active-button
+        [isActive]="isMainActive"
+        inactiveLabel="Play Main"
+        activeLabel="Mute Main"
+        (buttonClicked)="toggleMainActive()"
+      ></sc-active-button>
+    </div>
   </div>
 </main>

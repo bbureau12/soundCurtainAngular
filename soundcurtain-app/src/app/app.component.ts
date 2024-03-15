@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'soundcurtain-app';
+  public isMainActive = false;
+
+  public toggleMainActive(){
+    console.log('button click hit.');
+    this.isMainActive = !this.isMainActive;
+  }
 }
