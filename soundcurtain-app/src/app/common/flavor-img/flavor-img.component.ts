@@ -6,7 +6,7 @@ import { selectRandomImage } from './store/flavor-img.selector';
 @Component({
   selector: 'app-flavor-img',
   templateUrl: './flavor-img.component.html',
-  styleUrls: ['./flavor-img.component.scss']
+  styleUrls: ['./flavor-img.component.scss'],
 })
 export class FlavorImgComponent implements OnInit {
   image$ = this.store.pipe(select(selectRandomImage));

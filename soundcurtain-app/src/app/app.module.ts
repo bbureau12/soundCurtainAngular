@@ -13,11 +13,13 @@ import { reducers } from './store/app.state';
 import { MediaService } from './services/mediaService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
+import { ImageSizeClassDirective } from './common/flavor-img/imageSizeClassDirective';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FlavorImgComponent
+    FlavorImgComponent,
+    ImageSizeClassDirective,
   ],
   imports: [
     BrowserModule,

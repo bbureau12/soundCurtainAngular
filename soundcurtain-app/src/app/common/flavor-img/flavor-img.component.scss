@@ -1,6 +1,8 @@
-.main-img{
-    max-width: 60%;
-    min-width: 60%;
-    display: block; /* Ensure the image behaves as a block element */
-    margin: auto;
-  }
+.landscape-image-class {
+  width: 70%;
+  height: auto;
+}
+.portrait-image-class {
+  height:50%;
+  width:auto;
+}

@@ -1,25 +1,11 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
-.flavorContainer {
-  width: 100%; /* Set width of the container */
-  height: 300px; /* Set height of the container */
-  position: relative; /* Set position to relative to contain the absolutely positioned image */
-}
-/* You can add global styles to this file, and also import other style files */
-.flavorContainer img{
-  position: absolute; /* Set position to absolute to position the image within the container */
-  width: 70%; /* Set width of the image to 70% of the container width */
-  height: auto; /* Maintain aspect ratio of the image */
-  top: 50%; /* Position the image vertically at the center */
-  left: 50%; /* Position the image horizontally at the center */
-  transform: translate(-50%, -50%);
-  }
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.main-img-parent {
-  /* Your styles here */
-  /* For example, centering horizontally */
-  display: flex;
+.main-container {
+  width: 80%;
   justify-content: center;
+}
+.nav-container {
+  width: 20%
 }
