@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { ImageSizeClassDirective } from './common/flavor-img/imageSizeClassDirective';
 import { ActiveButtonModule } from './common/ActiveButton/active-button.module';
+import { RouteButtonModule } from './common/RouteButton/route-button.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ActiveButtonModule } from './common/ActiveButton/active-button.module';
     StoreModule.forRoot(reducers),
     HttpClientModule,
     EffectsModule.forRoot([ImageEffects]),
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,   
+    RouteButtonModule,
     MatCardModule
   ],
   providers: [

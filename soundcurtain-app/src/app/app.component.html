@@ -8,13 +8,31 @@
         <sc-clock></sc-clock>
       </div>
     </div>
-    <div class="col-sm-3 justify-content-center align-items-center"><p></p>
+    <div class="col-sm-3 d-flex flex-column justify-content-center align-items-center"><p></p>
       <sc-active-button
         [isActive]="isMainActive"
         inactiveLabel="Play Main"
         activeLabel="Mute Main"
-        (buttonClicked)="toggleMainActive()"
-      ></sc-active-button>
+        (buttonClicked)="toggleMainActive()">
+      </sc-active-button>
+      <p></p>
+      <sc-active-button
+      [isActive]="isAmbientActive"
+      inactiveLabel="Play Ambient"
+      activeLabel="Mute Ambient"
+      (buttonClicked)="toggleAmbientActive()">
+    </sc-active-button>
+    <p></p>
+      <sc-active-button
+        [isActive]="isScheduleRunning"
+        inactiveLabel="Run Schedule"
+        activeLabel="Stop Schedule">
+      </sc-active-button>
+      <p></p>
+
+      <sc-route-button
+      label="Settings">
+    </sc-route-button>
     </div>
   </div>
 </main>
