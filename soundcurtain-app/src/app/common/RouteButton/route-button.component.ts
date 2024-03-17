@@ -7,9 +7,5 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
   })
 export class RouteButtonComponent  {
     @Input() label = '';
-    @Output() buttonClicked: EventEmitter<void> = new EventEmitter<void>();
-
-    onClick(): void {
-        this.buttonClicked.emit();
-    }
+    @Input() routerOutlet ='';
   }

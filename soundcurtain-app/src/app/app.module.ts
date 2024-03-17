@@ -13,14 +13,20 @@ import { reducers } from './store/app.state';
 import { MediaService } from './services/mediaService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 import { ImageSizeClassDirective } from './common/flavor-img/imageSizeClassDirective';
 import { ActiveButtonModule } from './common/ActiveButton/active-button.module';
-import { RouteButtonModule } from './common/RouteButton/route-button.module';
+import { RouteButtonModule } from './common/routeButton/route-button.module';
+import { HomeComponent } from './home/home.component';
+import { SettingsModule } from './settings/settings.containr.module';
+import { RouterModule } from '@angular/router';
+import { CloseButtonModule } from './common/close-button/close-button.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlavorImgComponent,
+    HomeComponent,
     ImageSizeClassDirective,
   ],
   imports: [
@@ -28,12 +34,15 @@ import { RouteButtonModule } from './common/RouteButton/route-button.module';
     BrowserModule,
     AppRoutingModule,
     ClockModule,
+    CloseButtonModule,
     StoreModule.forRoot(reducers),
     HttpClientModule,
     EffectsModule.forRoot([ImageEffects]),
     BrowserAnimationsModule,   
+    MatCardModule,
     RouteButtonModule,
-    MatCardModule
+    RouterModule,
+    SettingsModule,
   ],
   providers: [
     MediaService

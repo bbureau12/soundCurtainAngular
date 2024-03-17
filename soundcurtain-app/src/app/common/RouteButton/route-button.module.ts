@@ -1,11 +1,14 @@
 import { NgModule } from "@angular/core";
-import { RouteButtonComponent } from "./route-button.component";
 import { CommonModule } from "@angular/common";
+import { RouteButtonComponent } from "./route-button.component";
+import { RouterModule } from "@angular/router";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
-    imports:[CommonModule ],
+    imports:[CommonModule, 
+        RouterModule ],
     declarations: [
-        RouteButtonComponent
+        RouteButtonComponent,
     ],
     exports: [
         RouteButtonComponent,
