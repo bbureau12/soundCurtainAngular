@@ -12,15 +12,43 @@ export class ClockComponent  {
     seconds:any;
     currentLocale: any;
     timeOfDay: string = '';
+    count = 0;
 
     isTwelveHrFormat = false;
     test:any;
+
     constructor(){
       setInterval(() =>{
      const currentDate = new Date();
      this.date = currentDate.toLocaleTimeString();
-     this.calculateTimeOfDay()
+     this.calculateTimeOfDay();
+     this.runTimers();
       }, 1000);
+    }
+
+    runTimers() {
+      this.count = this.count + 1;
+      if (this.count % 5 == 0)
+      {
+        console.log('in 5');
+      }
+      if (this.count % 10 == 0)
+      {
+        console.log('in 10');
+      }
+      if (this.count % 30 == 0)
+      {
+        console.log('in 30');
+      }
+      if (this.count % 60 == 0)
+      {
+        console.log('in 60');
+      }
+      if (this.count >= 500)
+      {
+        console.log('in 5 min');
+        this.count = 0;
+      }
     }
 
     calculateTimeOfDay() {
@@ -32,7 +60,7 @@ export class ClockComponent  {
         this.timeOfDay = 'afternoon';
       }
       else if (currentHour >= 18 && currentHour < 20) {
-        this.timeOfDay = 'sunset';
+        this.timeOfDay = 'evening';
       }
        else {
         this.timeOfDay = 'night';

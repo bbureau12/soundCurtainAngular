@@ -6,21 +6,20 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.interfaces';
 import { environment } from '../environments/environment';
 import { Image } from '../common/models/image';
+import { Setting } from '../common/models/setting';
 
 @Injectable()
-export class MediaService  {
+export class SettingService  {
     private domainClientBaseUrl: string;
 
     constructor(private http: HttpClient, private store: Store<AppState>) {
         this.domainClientBaseUrl = `${environment.mediaApiUrl}`;
     }
 
-    public getRandomImage(): Observable<Image> {
-        console.log('In service');
-        //const image = this.http.get<Image>(`${this.domainClientBaseUrl}/image`)
-        const image = this.http.get<Image>(`${this.domainClientBaseUrl}/image/random`)
-        console.log(image);
-        return  image;
+    public getSettings(): Observable<Setting[]> {
+        const payload = this.http.get<Setting[]>(`${this.domainClientBaseUrl}/setting/all`)
+        console.log(payload);
+        return  payload;
     }
 
 }

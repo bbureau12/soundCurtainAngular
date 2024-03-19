@@ -9,29 +9,30 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.interfaces';
 import { MediaService } from 'src/app/services/mediaService';
 import { environment } from 'src/app/environments/environment';
-import { getRandomImage, getRandomImageOnFailure, getRandomImageOnSuccess } from './flavor-img.actions';
+import { SettingService } from 'src/app/services/settingsService';
+import { getSettings, getSettingsOnFailure, getSettingsOnSuccess } from './settings.actions';
 
 @Injectable()
-export class ImageEffects {
+export class SettingsEffects {
   constructor(
     private actions$: Actions,
-    private myService: MediaService
+    private settingsService: SettingService
   ) {
   }
 
-  randomSoundEffect$ = createEffect(() =>
+  settings$ = createEffect(() =>
   this.actions$.pipe(
-    ofType(getRandomImage),
-    switchMap(() => {
-      console.log ('in effect')
-      return this.myService.getRandomImage().pipe(
-        map((image) =>{ 
-            console.log(image)
-            return getRandomImageOnSuccess({ image })}),
+    ofType(getSettings),
+    switchMap(() =>
+      this.settingsService.getSettings().pipe(
+        map((settings) =>{ 
+            console.log('in effect')
+            console.log(settings)
+            return getSettingsOnSuccess({ settings })}),
         catchError((error) => { 
             console.log(error)
-            return of(getRandomImageOnFailure({ error }))})
-      )}
+            return of(getSettingsOnFailure({ error }))})
+      )
     )
   )
 );

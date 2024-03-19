@@ -13,7 +13,6 @@ import { reducers } from './store/app.state';
 import { MediaService } from './services/mediaService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
-import {MatIconModule} from '@angular/material/icon';
 import { ImageSizeClassDirective } from './common/flavor-img/imageSizeClassDirective';
 import { ActiveButtonModule } from './common/ActiveButton/active-button.module';
 import { RouteButtonModule } from './common/routeButton/route-button.module';
@@ -21,6 +20,8 @@ import { HomeComponent } from './home/home.component';
 import { SettingsModule } from './settings/settings.containr.module';
 import { RouterModule } from '@angular/router';
 import { CloseButtonModule } from './common/close-button/close-button.module';
+import { SettingService } from './services/settingsService';
+import { SettingsEffects } from './settings/store/settings.effects';
 
 @NgModule({
   declarations: [
@@ -31,21 +32,22 @@ import { CloseButtonModule } from './common/close-button/close-button.module';
   ],
   imports: [
     ActiveButtonModule,
-    BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
     ClockModule,
     CloseButtonModule,
-    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([ImageEffects, SettingsEffects]),
     HttpClientModule,
-    EffectsModule.forRoot([ImageEffects]),
-    BrowserAnimationsModule,   
     MatCardModule,
     RouteButtonModule,
     RouterModule,
     SettingsModule,
+    StoreModule.forRoot(reducers),
   ],
   providers: [
-    MediaService
+    MediaService,
+    SettingService
   ],
   bootstrap: [AppComponent]
 })

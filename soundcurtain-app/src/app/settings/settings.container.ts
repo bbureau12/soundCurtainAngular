@@ -1,21 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Setting } from '../common/models/setting';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.interfaces';
+import { getSettings } from './store/settings.actions';
 
 @Component({
   selector: 'settings',
   templateUrl: './settings.container.html'
 })
 export class SettingsContainer {
-  title = 'soundcurtain-app';
-  public isMainActive = false;
-  public isAmbientActive = false;
-  public isScheduleRunning = true;
+  title = 'settings-app';
+  @Input() settings: Setting[] | undefined;
+  constructor(private store: Store<AppState>) {
+    // this.store.dispatch(getRandomSound(
+  };
 
-  public toggleMainActive(){
-    console.log('button click hit.');
-    this.isMainActive = !this.isMainActive;
-  }
-  public toggleAmbientActive(){
-    console.log('button click hit.');
-    this.isAmbientActive = !this.isAmbientActive;
+  ngOnInit(): void {
+    this.store.dispatch(getSettings());
   }
 }

@@ -1,0 +1,12 @@
+<form [formGroup]="form">
+    <div formArrayName="keyValuePairs">
+      <div *ngFor="let kvp of keyValuePairings.controls; let i = index" [formGroupName]="i">
+        <label>
+          Key: <input type="text" formControlName="key">
+        </label>
+        <label>
+          Value: <input type="text" formControlName="value">
+        </label>
+      </div>
+    </div>
+  </form>

@@ -15,6 +15,7 @@ export class FlavorImgComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    console.log('in oninit')
     this.store.dispatch(getRandomImage());
     setInterval(() =>{
       const currentDate = new Date();
