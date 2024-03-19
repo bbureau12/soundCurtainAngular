@@ -1,6 +1,6 @@
 
-export class Setting {
-    public readonly Key?: string;
-    public readonly Value?: number;
-    public readonly IsPublic?: number;
+export interface Setting {
+    Key: string;
+    Value: string;
+    IsPublic: number;
 }

@@ -1,16 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-
-import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { state } from '@angular/animations';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.interfaces';
-import { MediaService } from 'src/app/services/mediaService';
-import { environment } from 'src/app/environments/environment';
 import { SettingService } from 'src/app/services/settingsService';
-import { getSettings, getSettingsOnFailure, getSettingsOnSuccess } from './settings.actions';
+import { getSettings, getSettingsOnFailure, getSettingsOnSuccess, updateSettings } from './settings.actions';
+import { of } from 'rxjs';
 
 @Injectable()
 export class SettingsEffects {
@@ -35,6 +29,23 @@ export class SettingsEffects {
       )
     )
   )
+);
+
+update$ = createEffect(() =>
+this.actions$.pipe(
+  ofType(updateSettings),
+  switchMap((action) =>
+    this.settingsService.updateSettings(action.settings).pipe(
+      map((settings) =>{ 
+          console.log('in effect')
+          console.log(settings)
+          return getSettingsOnSuccess({ settings })}),
+      catchError((error) => { 
+          console.log(error)
+          return of(getSettingsOnFailure({ error }))})
+    )
+  )
+)
 );
 
 }

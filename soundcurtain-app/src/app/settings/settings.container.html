@@ -1,4 +1,10 @@
 <main>
 <b>Settings</b>
 <sc-close-button></sc-close-button>
+<ng-container *ngIf="(hasSettings$ | async) else noSettings">
+    <settings-form [settings]="publicSettings$ | async"></settings-form>
+</ng-container>
+<ng-template #noSettings>
+    <p>No settings available</p>
+  </ng-template>
 </main>

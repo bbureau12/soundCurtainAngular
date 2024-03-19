@@ -41,6 +41,7 @@ export class ClockComponent  {
     }
 }
 
+// TODO: Implement timer managers to allow other components to add actions to call.
     runTimers() {
       this.count = this.count + 1;
       if (this.count % 5 == 0)
@@ -50,6 +51,7 @@ export class ClockComponent  {
       if (this.count % 10 == 0)
       {
         console.log('in 10');
+        //TODO: set up websocket call to update this automatically.
         this.store.dispatch(getSettings());
       }
       if (this.count % 30 == 0)

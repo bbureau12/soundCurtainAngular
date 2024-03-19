@@ -3,6 +3,8 @@ import { Setting } from '../common/models/setting';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.interfaces';
 import { getSettings } from './store/settings.actions';
+import { selectSettings } from './store/settings.selector';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'settings',
@@ -10,7 +12,10 @@ import { getSettings } from './store/settings.actions';
 })
 export class SettingsContainer {
   title = 'settings-app';
-  @Input() settings: Setting[] | undefined;
+  public publicSettings$ = this.store.select(selectSettings);
+  public hasSettings$: Observable<boolean> = this.publicSettings$.pipe(
+    map(settings => !!settings && settings.length > 0)
+  );
   constructor(private store: Store<AppState>) {
     // this.store.dispatch(getRandomSound(
   };

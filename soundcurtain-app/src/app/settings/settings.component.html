@@ -1,12 +1,11 @@
 <form [formGroup]="form">
-    <div formArrayName="keyValuePairs">
-      <div *ngFor="let kvp of keyValuePairings.controls; let i = index" [formGroupName]="i">
-        <label>
-          Key: <input type="text" formControlName="key">
-        </label>
-        <label>
-          Value: <input type="text" formControlName="value">
-        </label>
-      </div>
-    </div>
-  </form>
+  <div *ngFor="let setting of settings">
+    <label>
+      {{setting.Key}}
+    </label>
+    <label>
+     <input type="text" [formControlName]="setting.Key">
+    </label>
+  </div>
+  <button type="button" (click)="onSubmit()" >Submit</button>
+</form>
