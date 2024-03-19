@@ -1,4 +1,8 @@
 import { Component } from "@angular/core";
+import { getRandomImage } from "../flavor-img/store/flavor-img.actions";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/store/app.interfaces";
+import { getSettings } from "src/app/settings/store/settings.actions";
 
 @Component({
     selector: 'sc-clock',
@@ -16,15 +20,26 @@ export class ClockComponent  {
 
     isTwelveHrFormat = false;
     test:any;
+    private intervalId: any;
 
-    constructor(){
-      setInterval(() =>{
-     const currentDate = new Date();
-     this.date = currentDate.toLocaleTimeString();
-     this.calculateTimeOfDay();
-     this.runTimers();
-      }, 1000);
+    constructor(private store: Store<AppState>){
     }
+    
+    ngOnInit() {
+        this.intervalId = setInterval(() => {
+            const currentDate = new Date();
+            this.date = currentDate.toLocaleTimeString();
+            this.calculateTimeOfDay();
+            this.runTimers();
+        }, 1000);
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      console.log('destroying interval ID.')
+        clearInterval(this.intervalId); // Clear interval on component destruction
+    }
+}
 
     runTimers() {
       this.count = this.count + 1;
@@ -35,6 +50,7 @@ export class ClockComponent  {
       if (this.count % 10 == 0)
       {
         console.log('in 10');
+        this.store.dispatch(getSettings());
       }
       if (this.count % 30 == 0)
       {
@@ -42,7 +58,8 @@ export class ClockComponent  {
       }
       if (this.count % 60 == 0)
       {
-        console.log('in 60');
+        console.log('in 60.  Getting image.');
+        this.store.dispatch(getRandomImage());
       }
       if (this.count >= 500)
       {
