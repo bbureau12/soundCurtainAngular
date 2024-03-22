@@ -22,6 +22,8 @@ import { RouterModule } from '@angular/router';
 import { CloseButtonModule } from './common/close-button/close-button.module';
 import { SettingService } from './services/settingsService';
 import { SettingsEffects } from './settings/store/settings.effects';
+import { NowPlayingService } from './services/nowPlayingService';
+import { ActionService } from './services/actionService';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { SettingsEffects } from './settings/store/settings.effects';
     StoreModule.forRoot(reducers),
   ],
   providers: [
+    ActionService,
     MediaService,
+    NowPlayingService,
     SettingService
   ],
   bootstrap: [AppComponent]

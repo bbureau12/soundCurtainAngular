@@ -10,14 +10,14 @@
     </div>
     <div class="col-sm-3 d-flex flex-column justify-content-center align-items-center"><p></p>
       <sc-active-button
-        [isActive]="isMainActive"
+        [isActive]="isMainActive$ | async"
         inactiveLabel="Play Main"
         activeLabel="Mute Main"
         (buttonClicked)="toggleMainActive()">
       </sc-active-button>
       <p></p>
       <sc-active-button
-      [isActive]="isAmbientActive"
+      [isActive]="isAmbientActive$ | async"
       inactiveLabel="Play Ambient"
       activeLabel="Mute Ambient"
       (buttonClicked)="toggleAmbientActive()">

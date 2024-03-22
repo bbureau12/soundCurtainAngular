@@ -1,8 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { getRandomImage } from "../flavor-img/store/flavor-img.actions";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.interfaces";
 import { getSettings } from "src/app/settings/store/settings.actions";
+import { Actions, ofType } from "@ngrx/effects";
+import { queueActionOnSuccess } from "src/app/actionQueue/store/actionQueue.actions";
+import { getNowPlaying } from "src/app/nowPlaying/store/nowPlaying.actions";
 
 @Component({
     selector: 'sc-clock',
@@ -10,6 +13,7 @@ import { getSettings } from "src/app/settings/store/settings.actions";
     styleUrls: [ './clock.component.css' ]
   })
 export class ClockComponent  {
+    nowPlayingCountdown = 0;
     date = '';
     hours:any;
     minutes:any;
@@ -22,7 +26,7 @@ export class ClockComponent  {
     test:any;
     private intervalId: any;
 
-    constructor(private store: Store<AppState>){
+    constructor(private actions$: Actions, private store: Store<AppState>){
     }
     
     ngOnInit() {
@@ -32,6 +36,12 @@ export class ClockComponent  {
             this.calculateTimeOfDay();
             this.runTimers();
         }, 1000);
+        this.actions$.pipe(
+          ofType(queueActionOnSuccess)
+        ).subscribe(() => {
+          // Call your method when the action is dispatched
+          this.onQueueActionSuccess();
+        });
   }
 
   ngOnDestroy() {
@@ -40,10 +50,19 @@ export class ClockComponent  {
         clearInterval(this.intervalId); // Clear interval on component destruction
     }
 }
+  onQueueActionSuccess(){
+    console.log('onQueueActionSuccess called in clock component.')
+    this.nowPlayingCountdown = 3
+  }
 
 // TODO: Implement timer managers to allow other components to add actions to call.
     runTimers() {
       this.count = this.count + 1;
+      if (this.count % 2 == 0 && this.nowPlayingCountdown > 0)
+      {
+
+
+      }
       if (this.count % 5 == 0)
       {
         console.log('in 5');
@@ -51,8 +70,6 @@ export class ClockComponent  {
       if (this.count % 10 == 0)
       {
         console.log('in 10');
-        //TODO: set up websocket call to update this automatically.
-        this.store.dispatch(getSettings());
       }
       if (this.count % 30 == 0)
       {

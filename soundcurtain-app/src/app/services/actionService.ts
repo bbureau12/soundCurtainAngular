@@ -24,11 +24,9 @@ export class ActionService  {
         this.domainClientBaseUrl = `${environment.mediaApiUrl}`;
     }
 
-    public getRandomImage(): Observable<Image> {
-        //const image = this.http.get<Image>(`${this.domainClientBaseUrl}/image`)
-        const image = this.http.get<Image>(`${this.domainClientBaseUrl}/image/random`)
-        console.log(image);
-        return  image;
+    public queueAction(actionId: number) {
+        var result = this.http.post(`${this.domainClientBaseUrl}/queue/add/`+actionId.toString(),'')
+        return result;
     }
 
 }

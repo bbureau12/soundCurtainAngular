@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
     styleUrls: [ './active-button.component.css' ]
   })
 export class ActiveButtonComponent  {
-    @Input() isActive = false;
+    @Input() isActive: boolean | null = false;
     @Input() inactiveLabel = '';
     @Input() activeLabel = '';
     @Output() buttonClicked: EventEmitter<void> = new EventEmitter<void>();
