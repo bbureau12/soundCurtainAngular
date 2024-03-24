@@ -38,7 +38,14 @@ export class NowPlayingService implements OnDestroy {
     }
 
     public closeStream(): void {
-       this.http.delete(`${this.domainClientBaseUrl}/nowPlaying/stream/${this.streamId}`);
+       this.http.delete(`${this.domainClientBaseUrl}/nowPlaying/stream/${this.streamId}`).subscribe({
+        next: (response) => {
+          console.log('Stream closed successfully', response);
+        },
+        error: (error) => {
+          console.error('Error closing stream', error);
+        }
+      });
     }
 
     public getStream(): Observable<any> {
