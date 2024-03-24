@@ -1,18 +1,35 @@
 import { Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.interfaces';
 import { environment } from '../environments/environment';
 import { NowPlayingAudio } from '../common/models/nowPlayingAudio';
+import { generateGUID } from '../common/Helpers/string-helpers';
 
 @Injectable()
-export class NowPlayingService  {
+export class NowPlayingService implements OnDestroy {
     private domainClientBaseUrl: string;
-
+    private eventSource?: EventSource;
+    private streamId = generateGUID();
     constructor(private http: HttpClient, private store: Store<AppState>) {
         this.domainClientBaseUrl = `${environment.mediaApiUrl}`;
+    }
+    ngOnDestroy(): void {
+      if (this.eventSource)
+      {
+        this.eventSource.close();
+      }
+      this.closeStream();
+    }
+
+    public clearSource(): void {
+      if (this.eventSource)
+      {
+        this.eventSource.close();
+      }
+      this.closeStream();
     }
 
     public getNowPlaying(): Observable<NowPlayingAudio[]> {
@@ -20,20 +37,27 @@ export class NowPlayingService  {
         return  payload;
     }
 
+    public closeStream(): void {
+       this.http.delete(`${this.domainClientBaseUrl}/nowPlaying/stream/${this.streamId}`);
+    }
+
     public getStream(): Observable<any> {
         return new Observable<any>(observer => {
-          const eventSource = new EventSource(`${this.domainClientBaseUrl}/nowPlaying/stream`);
+          this.eventSource = new EventSource(`${this.domainClientBaseUrl}/nowPlaying/stream/${this.streamId}`);
     
-          eventSource.onmessage = (event) => {
+          this.eventSource.onmessage = (event) => {
             observer.next(event.data);
           };
     
-          eventSource.onerror = (error) => {
+          this.eventSource.onerror = (error) => {
             observer.error(error);
           };
     
           return () => {
-            eventSource.close();
+            if (this.eventSource)
+            {
+              this.eventSource.close();
+            }
           };
         });
       }
