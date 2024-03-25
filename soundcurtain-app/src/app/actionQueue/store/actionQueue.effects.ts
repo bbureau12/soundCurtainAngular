@@ -7,21 +7,19 @@ import { of } from 'rxjs';
 import { ActionService } from 'src/app/services/actionService';
 
 @Injectable()
-export class SettingsEffects {
+export class ActionQueueEffects {
   constructor(
     private actions$: Actions,
     private actionService: ActionService
   ) {
   }
 
-  update$ = createEffect(() =>
+  action$ = createEffect(() =>
   this.actions$.pipe(
     ofType(queueAction),
     switchMap((action) =>
       this.actionService.queueAction(action.actionId).pipe(
-        map((settings) =>{ 
-            console.log('in effect')
-            console.log(settings)
+        map(() =>{ 
             return queueActionOnSuccess()
           }),
         catchError((error) => { 

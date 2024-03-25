@@ -24,6 +24,7 @@ import { SettingService } from './services/settingsService';
 import { SettingsEffects } from './settings/store/settings.effects';
 import { NowPlayingService } from './services/nowPlayingService';
 import { ActionService } from './services/actionService';
+import { ActionQueueEffects } from './actionQueue/store/actionQueue.effects';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { ActionService } from './services/actionService';
     BrowserModule,
     ClockModule,
     CloseButtonModule,
-    EffectsModule.forRoot([ImageEffects, SettingsEffects]),
+    EffectsModule.forRoot([ActionQueueEffects, ImageEffects, SettingsEffects]),
     HttpClientModule,
     MatCardModule,
     RouteButtonModule,

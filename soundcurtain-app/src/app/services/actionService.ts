@@ -25,6 +25,7 @@ export class ActionService  {
     }
 
     public queueAction(actionId: number) {
+        console.log('in effects with', actionId);
         var result = this.http.post(`${this.domainClientBaseUrl}/queue/add/`+actionId.toString(),'')
         return result;
     }

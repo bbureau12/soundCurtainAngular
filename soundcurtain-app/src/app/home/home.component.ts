@@ -7,6 +7,7 @@ import { AppState } from '../store/app.interfaces';
 import { selectAmbientStatus, selectMainStatus } from '../nowPlaying/store/nowPlaying.selector';
 import { NowPlayingEntry } from '../common/models/nowplayingEntry';
 import { setAmbientTrackStatus, setMainTrackStatus } from '../nowPlaying/store/nowPlaying.actions';
+import { queueAction } from '../actionQueue/store/actionQueue.actions';
 
 @Component({
   selector: 'home',
@@ -94,14 +95,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   public isMainActive$=this.store.select(selectMainStatus);
   public isAmbientActive$=this.store.select(selectAmbientStatus);
   public toggleMainActive(){
-    console.log('button click hit.');
-    this.isMainActive = !this.isMainActive;
+    console.log('in toggle main');
+    if (this.isMainActive)
+    {
+      this.store.dispatch(queueAction({actionId:1}))
+    }
+    else {
+      this.store.dispatch(queueAction({actionId:4}))
+    }
   }
   public toggleAmbientActive(){
-    console.log('button click hit.');
-    this.isAmbientActive = !this.isAmbientActive;
+    console.log('in toggle ambient');
+    if (this.isAmbientActive)
+    {
+      this.store.dispatch(queueAction({actionId:2}))
+    }
+    else {
+      this.store.dispatch(queueAction({actionId:5}))
+    }
   }
-  public toggleMain(){
-    
-  }
+
 }
