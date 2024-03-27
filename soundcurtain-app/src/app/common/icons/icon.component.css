@@ -1,0 +1,15 @@
+
+/* CSS */
+.sc-icon{
+  height: 25px;
+}
+.sc-icon.night { 
+  filter: invert(100%);
+}
+.sc-icon.evening { 
+  filter: invert(100%);
+}
+
+.sc-icon.invert { 
+  filter: invert(100%);
+}

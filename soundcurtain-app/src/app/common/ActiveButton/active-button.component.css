@@ -4,7 +4,6 @@
   padding: 0.6em 2em;
   border: none;
   outline: none;
-  color: rgb(255, 255, 255);
   background: #111;
   cursor: pointer;
   position: relative;
@@ -36,7 +35,7 @@
   z-index: -1;
   filter: blur(5px);
   -webkit-filter: blur(5px);
-  width: calc(100% + 4px);
+  width: 176px;
   height: calc(100% + 4px);
   animation: glowing-button-85 20s linear infinite;
   transition: opacity 0.3s ease-in-out;
@@ -58,14 +57,19 @@
 .button-85:after {
   z-index: -1;
   content: "";
+  justify-content: center;
   position: absolute;
-  width: 100%;
+  width: 170px;
   height: 100%;
-  background: #222;
   left: 0;
   top: 0;
   border-radius: 10px;
 }
-.button-85.active:after {
-  background: #4df1ad;
-}
+.button-85.night { color: rgb(255, 255, 255);}
+.button-85.night:after { background: #14310f; color: rgb(255, 255, 255);}
+.button-85.morning { color: rgb(0, 0, 0);}
+.button-85.morning:after { background: #d0d7f3; color: rgb(0, 0, 0);}
+.button-85.afternoon { color: rgb(0, 0, 0);}
+.button-85.afternoon:after { background: #ff9c83; color: rgb(0, 0, 0);}
+.button-85.evening { color: rgb(255, 255, 255);}
+.button-85.evening:after { background:#2105d9; color: rgb(255, 255, 255);}

@@ -1,16 +1,12 @@
 import { createSelector } from "@ngrx/store";
 import { AppState } from "src/app/store/app.interfaces";
 
-export const selectSettingsState = (state: AppState) => state.settingsState;
+export const selectState = (state: AppState) => state.timeState;
 // Select the randomSound from the sound feature state
-export const selectSettings = createSelector(
-  selectSettingsState,
+export const selectCurrentTimeClass = createSelector(
+  selectState,
     (state) => { 
-      if (state.settings != undefined && state.settings.length >0)
-      {
-        return state.settings?.filter(setting => setting.IsPublic!=0)
-      }
-      return []
+      return state.currentTimeClass;
     }
   );
   

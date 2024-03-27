@@ -1,39 +1,48 @@
 <main>
   <div class="row">
-    <div class="col-sm-8 d-flex flex-column justify-content-center align-items-center">
-      <div class="row">
-        <app-flavor-img></app-flavor-img>
+    <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-9 d-flex flex-column justify-content-center align-items-center">
+            <app-flavor-img></app-flavor-img>
+          </div>
+          <div class="col-sm-2 d-flex flex-column justify-content-center align-items-left">
+              <sc-active-button
+                [isActive]="isMainActive$ | async"
+                activeIconPath="mute.png"
+                inactiveIconPath="play.png"
+                inactiveLabel="Play Main"
+                activeLabel="Mute Main"
+                (buttonClicked)="toggleMainActive()">
+              </sc-active-button>
+              <p></p>
+              <sc-active-button
+              [isActive]="isAmbientActive$ | async"
+              activeIconPath="mute.png"
+              inactiveIconPath="play.png"
+              inactiveLabel="Play Ambient"
+              activeLabel="Mute Ambient"
+              (buttonClicked)="toggleAmbientActive()">
+            </sc-active-button>
+            <p></p>
+            <!-- Only show 'run schedule' if schedule is not running -->
+            <ng-container *ngIf="!(isScheduleRunning$ | async)">
+              <sc-active-button
+                [isActive]="isScheduleRunning$ | async"
+                inactiveLabel="Run Schedule"
+                (buttonClicked)="toggleAmbientActive()">
+              </sc-active-button>
+            </ng-container>
+              <p></p>
+              <sc-route-button
+                label="Settings"
+                iconPath="gear_single.png"
+                routerOutlet="settings">
+            </sc-route-button>
+          </div>
       </div>
       <div class="row">
         <sc-clock></sc-clock>
       </div>
-    </div>
-    <div class="col-sm-3 d-flex flex-column justify-content-center align-items-center"><p></p>
-      <sc-active-button
-        [isActive]="isMainActive$ | async"
-        inactiveLabel="Play Main"
-        activeLabel="Mute Main"
-        (buttonClicked)="toggleMainActive()">
-      </sc-active-button>
-      <p></p>
-      <sc-active-button
-      [isActive]="isAmbientActive$ | async"
-      inactiveLabel="Play Ambient"
-      activeLabel="Mute Ambient"
-      (buttonClicked)="toggleAmbientActive()">
-    </sc-active-button>
-    <p></p>
-      <sc-active-button
-        [isActive]="isScheduleRunning"
-        inactiveLabel="Run Schedule"
-        activeLabel="Stop Schedule">
-      </sc-active-button>
-      <p></p>
-
-      <sc-route-button
-      label="Settings"
-      routerOutlet="settings">
-    </sc-route-button>
     </div>
   </div>
 </main>

@@ -6,6 +6,7 @@ import { getSettings } from "src/app/settings/store/settings.actions";
 import { Actions, ofType } from "@ngrx/effects";
 import { queueActionOnSuccess } from "src/app/actionQueue/store/actionQueue.actions";
 import { getNowPlaying } from "src/app/nowPlaying/store/nowPlaying.actions";
+import { setTimeClass } from "./store/time.actions";
 
 @Component({
     selector: 'sc-clock',
@@ -65,24 +66,22 @@ export class ClockComponent  {
       }
       if (this.count % 5 == 0)
       {
-        console.log('in 5');
       }
       if (this.count % 10 == 0)
       {
-        console.log('in 10');
       }
       if (this.count % 30 == 0)
       {
-        console.log('in 30');
       }
       if (this.count % 60 == 0)
       {
-        console.log('in 60.  Getting image.');
+      }
+      if (this.count % 120 == 0)
+      {
         this.store.dispatch(getRandomImage());
       }
       if (this.count >= 500)
       {
-        console.log('in 5 min');
         this.count = 0;
       }
     }
@@ -101,5 +100,6 @@ export class ClockComponent  {
        else {
         this.timeOfDay = 'night';
       }
+      this.store.dispatch(setTimeClass({value: this.timeOfDay}));
     }
   }

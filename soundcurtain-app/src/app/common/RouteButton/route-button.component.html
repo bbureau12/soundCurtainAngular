@@ -3,6 +3,10 @@
     role="button"
     [routerLink]="routerOutlet">
     <ng-container>
+        <ng-container *ngIf="iconPath">
+            <sc-icon className="invert" [iconPath]="iconPath">
+            </sc-icon>
+        </ng-container>
         {{label}}
     </ng-container>
 </button>

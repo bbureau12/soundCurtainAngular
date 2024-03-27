@@ -14,16 +14,3 @@ export const selectSettings = createSelector(
     }
   );
   
-  export const selectIsScheduleRunning = createSelector(
-    selectSettingsState,
-      (state) => { 
-        console.log('settings', state)
-         const foundSetting = state?.settings?.find(i => i.Key.toLowerCase() == 'databaseoverride' );
-         if (foundSetting)
-         {
-          console.log('setting', foundSetting)
-            return foundSetting.Value=='0'
-         }
-         return false;
-      }
-    );

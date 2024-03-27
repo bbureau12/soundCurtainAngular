@@ -8,6 +8,8 @@ import { selectAmbientStatus, selectMainStatus } from '../nowPlaying/store/nowPl
 import { NowPlayingEntry } from '../common/models/nowplayingEntry';
 import { setAmbientTrackStatus, setMainTrackStatus } from '../nowPlaying/store/nowPlaying.actions';
 import { queueAction } from '../actionQueue/store/actionQueue.actions';
+import { selectIsScheduleRunning } from '../settings/store/settings.selector';
+import { getSettings, updateSettings } from '../settings/store/settings.actions';
 
 @Component({
   selector: 'home',
@@ -17,17 +19,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   title = 'soundcurtain-app';
   public isMainActive = false;
   public isAmbientActive = false;
-  public isScheduleRunning = true;
+  public isScheduleRunning$ = this.store.select(selectIsScheduleRunning);
   private subscription?: Subscription;
   private reconnectAttempts = 0;
   private readonly maxReconnectAttempts = 5;
   private reconnectDelay = 2000;
-  private readonly maxReconnectDelay = 32000; 
-  constructor(private actions$: Actions, private nowPlayingService: NowPlayingService, private store: Store<AppState>) {}
+  private readonly maxReconnectDelay = 32000;
+  constructor(private actions$: Actions, private nowPlayingService: NowPlayingService, private store: Store<AppState>) { }
   ngOnInit(): void {
-    if (!this.subscription)
-    {
-      console.log('subscribing.')
+    this
+    if (!this.subscription) {
+      this.store.dispatch(getSettings());
       this.subscription = this.nowPlayingService.getStream().subscribe({
         next: (data) => {
           this.parseTracks(data); // Reset to initial delay
@@ -45,7 +47,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         // Reset reconnection attempts on successful connection
         this.reconnectAttempts = 0;
         this.reconnectDelay = 2000;
-        this.parseTracks(data); 
+        this.parseTracks(data);
       },
       error: (error) => {
         this.handleReconnect();
@@ -54,18 +56,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private parseTracks(data: string): void {
-     const tracks: NowPlayingEntry[] = JSON.parse(data);
-     tracks.forEach((track: NowPlayingEntry)=> {
-      if (track.Type.toLowerCase() === "main")
-      {
-        this.store.dispatch(setMainTrackStatus({status:track.Track!=undefined}));
+    const tracks: NowPlayingEntry[] = JSON.parse(data);
+    tracks.forEach((track: NowPlayingEntry) => {
+      if (track.Type.toLowerCase() === "main") {
+        this.store.dispatch(setMainTrackStatus({ status: track.Track != undefined }));
       }
-      if (track.Type.toLowerCase() === "ambient")
-      {
-        this.store.dispatch(setAmbientTrackStatus({status:track.Track!=undefined}));
+      if (track.Type.toLowerCase() === "ambient") {
+        this.store.dispatch(setAmbientTrackStatus({ status: track.Track != undefined }));
       }
-     });
-     
+      if (track.Type.toLowerCase() === "updatesettings") {
+        this.store.dispatch(getSettings());
+      }
+    });
+
   }
   private handleReconnect(): void {
     if (this.reconnectAttempts < this.maxReconnectAttempts) {
@@ -85,33 +88,27 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('disconnecting');
-    if (this.subscription)
-    {
+    if (this.subscription) {
       this.subscription.unsubscribe();
     }
     this.nowPlayingService.clearSource();
   }
-  public isMainActive$=this.store.select(selectMainStatus);
-  public isAmbientActive$=this.store.select(selectAmbientStatus);
-  public toggleMainActive(){
-    console.log('in toggle main');
-    if (this.isMainActive)
-    {
-      this.store.dispatch(queueAction({actionId:1}))
+  public isMainActive$ = this.store.select(selectMainStatus);
+  public isAmbientActive$ = this.store.select(selectAmbientStatus);
+  public toggleMainActive() {
+    if (this.isMainActive) {
+      this.store.dispatch(queueAction({ actionId: 1 }))
     }
     else {
-      this.store.dispatch(queueAction({actionId:4}))
+      this.store.dispatch(queueAction({ actionId: 4 }))
     }
   }
-  public toggleAmbientActive(){
-    console.log('in toggle ambient');
-    if (this.isAmbientActive)
-    {
-      this.store.dispatch(queueAction({actionId:2}))
+  public toggleAmbientActive() {
+    if (this.isAmbientActive) {
+      this.store.dispatch(queueAction({ actionId: 2 }))
     }
     else {
-      this.store.dispatch(queueAction({actionId:5}))
+      this.store.dispatch(queueAction({ actionId: 5 }))
     }
   }
 

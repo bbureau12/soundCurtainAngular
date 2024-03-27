@@ -1,11 +1,9 @@
-import { catchError, map, Observable, of } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.interfaces';
 import { environment } from '../environments/environment';
-import { Image } from '../common/models/image';
 
 enum MainActions {
     PlayStdMain = 1,
@@ -25,7 +23,6 @@ export class ActionService  {
     }
 
     public queueAction(actionId: number) {
-        console.log('in effects with', actionId);
         var result = this.http.post(`${this.domainClientBaseUrl}/queue/add/`+actionId.toString(),'')
         return result;
     }

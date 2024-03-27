@@ -1,12 +1,24 @@
 <button 
     class="button-85" 
-    [ngClass]="{'active': isActive}"
+    [ngClass]="btnClass | async"
     role="button"
     (click)="onClick()">
     <ng-container *ngIf="isActive">
+        <ng-container *ngIf="activeIconPath">
+            <sc-icon
+               [iconPath]="activeIconPath"
+               [className]="btnClass | async">
+            </sc-icon>
+        </ng-container>
         {{activeLabel}}
     </ng-container>
     <ng-container *ngIf="!isActive">
+        <ng-container *ngIf="inactiveIconPath">
+            <sc-icon
+               [iconPath]="inactiveIconPath"
+               [className]="btnClass | async">
+            </sc-icon>
+        </ng-container>
         {{inactiveLabel}}
     </ng-container>
 </button>

@@ -8,4 +8,5 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 export class RouteButtonComponent  {
     @Input() label = '';
     @Input() routerOutlet ='';
+    @Input() iconPath = '';
   }
